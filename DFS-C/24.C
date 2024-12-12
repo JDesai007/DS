@@ -1,4 +1,4 @@
-	#include <stdio.h>
+// #include <stdio.h>
 #include <conio.h>
 
 void heapify(int arr[], int n, int i) {

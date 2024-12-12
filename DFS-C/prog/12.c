@@ -1,7 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Structure for a node in the circular linked list
 struct Node {
     int data;
     struct Node* next;
@@ -13,13 +12,12 @@ void insert(struct Node** head, int value) {
     newNode->data = value;
     newNode->next = NULL;
 
-    if (*head == NULL) { // If the list is empty
-        newNode->next = newNode; // Point to itself
+    if (*head == NULL) { 
+        newNode->next = newNode; 
         *head = newNode;
     } else {
         struct Node* temp = *head;
-
-        // Traverse to the last node
+        
         while (temp->next != *head) {
             temp = temp->next;
         }

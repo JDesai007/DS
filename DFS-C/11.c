@@ -1,16 +1,13 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-// Definition of a node
 struct Node {
     int data;
     struct Node* next;
 };
 
-// Head of the linked list
 struct Node* head = NULL;
 
-// Insert a node in sorted order
 void insertSorted() {
     int data;
     printf("Enter data to insert: ");
@@ -34,7 +31,6 @@ void insertSorted() {
     printf("Node inserted.\n");
 }
 
-// Delete a node
 void deleteNode() {
     int data;
     printf("Enter data to delete: ");
@@ -56,7 +52,6 @@ void deleteNode() {
     }
 }
 
-// Update a node
 void updateNode() {
     int oldData, newData;
     printf("Enter data to update: ");
@@ -69,14 +64,13 @@ void updateNode() {
         printf("Enter new data: ");
         scanf("%d", &newData);
         current->data = newData;
-        insertSorted();  // Reinsert to maintain sorted order
+        insertSorted();  
         printf("Node updated.\n");
     } else {
         printf("Node not found.\n");
     }
 }
 
-// Display the list
 void displayList() {
     struct Node* current = head;
     if (!current) {
@@ -90,7 +84,6 @@ void displayList() {
     printf("NULL\n");
 }
 
-// Main function
 void main() {
     int choice;
     while (1) {

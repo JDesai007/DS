@@ -9,6 +9,7 @@ void push(char x)
 {
     stack[++top] = x;
 }
+
 char pop()
 {
     if(top == -1)
@@ -38,30 +39,31 @@ void main()
     printf("\n");
     e = exp;
     printf("Postfix Expression: ");
-
     while(*e != '\0')
     {
-        if(isalnum(*e))
-            printf("%c ",*e);
-        else if(*e == '(')
-            push(*e);
-        else if(*e == ')')
-        {
-            while((x = pop()) != '(')
-            printf("%c ", x);
-        }
-        else
-        {
-            while(priority(stack[top]) >= priority(*e))
-            printf("%c ",pop());
-            push(*e);
-        }
-	    e++;
+
+
+	if(*e == '(')
+	    push(*e);
+	else if(*e == ')')
+	{
+	    while((x = pop()) != '(')
+		printf("%c ", x);
+	}
+       else if(isalnum(*e))
+	    printf("%c ",*e);
+	else
+	{
+	    while(priority(stack[top]) >= priority(*e))
+		printf("%c ",pop());
+	    push(*e);
+	}
+	e++;
     }
 
     while(top != -1)
     {
-	    printf("%c ",pop());
+	printf("%c ",pop());
     }
     getch();
 }

@@ -24,7 +24,7 @@ struct TreeNode* insert(struct TreeNode* root, int value) {
     }
 
     if (value < root->data) {
-        root->left = insert(root->left, value); // Insert into the left subtree
+        root->left = insert(root->left, value); 
     } else if (value > root->data) {
         root->right = insert(root->right, value); // Insert into the right subtree
     } else {

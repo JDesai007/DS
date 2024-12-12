@@ -1,27 +1,54 @@
 #include <stdio.h>
-#include <stdlib.h>
 
-int compare(const void* a, const void* b) {
-    return (*(int*)a - *(int*)b);
+void swap(int* a, int* b) {
+    int t = *a;
+    *a = *b;
+    *b = t;
 }
 
-void main() {
-    int arr[] = { 4, 2, 5, 3, 1 };
+int partition(int arr[], int low, int high) {
+    int pivot = arr[high];
+    int i = (low - 1);
 
-    int n = sizeof(arr) / sizeof(arr[0]);
-    int i,j;
-    clrscr();
-
-    printf("\nArray Elements is:  ");
-    for(j=0;j<n;j++)
-    {
-	printf("%d ",arr[j]);
+    for (int j = low; j <= high - 1; j++) {
+        if (arr[j] < pivot) {
+            i++;
+            swap(&arr[i], &arr[j]);
+        }
     }
-    qsort(arr, n, sizeof(int), compare);
+    swap(&arr[i + 1], &arr[high]);
+    return (i + 1);
+}
 
-    printf("\n\nSorted Array is:  ");
-    for (i = 0; i < n; i++)
-	printf("%d ", arr[i]);
+void quickSort(int arr[], int low, int high) {
+    if (low < high) {
+        int pi = partition(arr, low, high);
 
-    getch();
+        quickSort(arr, low, pi - 1);
+        quickSort(arr, pi + 1, high);
+    }
+}
+
+int main() {
+    int n;
+
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
+
+    int arr[n];
+
+    printf("Enter the elements: \n");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
+
+    quickSort(arr, 0, n - 1);
+
+    printf("Sorted array: \n");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+
+    printf("\n");
+    return 0;
 }

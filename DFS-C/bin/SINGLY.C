@@ -66,7 +66,6 @@ void remov()
 		else if(curr!=NULL)
 		{
 			p->next=curr->next;
-			p->next=NULL;
 		}
 		else
 		{

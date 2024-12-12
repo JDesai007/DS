@@ -18,9 +18,8 @@ void insert()
 	newnode->data=d;
 	if(head==NULL)
 	{
-
-	newnode->next=NULL;
-	head=newnode;
+		newnode->next=NULL;
+		head=newnode;
 	}
 	else
 	{
@@ -95,6 +94,24 @@ void display()
 
    }
 }
+void modify()
+{
+	struct node* temp = head;
+	int old,new;
+	printf("Enter value to modify: ");
+	scanf("%d", &old);
+	printf("Enter new value: ");
+	scanf("%d", &new);
+	while (temp != NULL) {
+	if (temp->data == old) {
+		temp->data = new;
+		printf("Modified value %d to %d.\n", old, new);
+		return;
+	}
+	temp = temp->next;
+    }
+    printf("Value %d not found in the list.\n", old);
+}
 
 void main()
 {
@@ -103,7 +120,7 @@ void main()
 	{
 		clrscr();
 		printf("Singly linked-list program");
-		printf("\n1.Insert \n2.Delete \n3.Display  \n0.Exit");
+		printf("\n1.Insert \n2.Delete \n3.Display \n4.modify \n0.Exit");
 		printf("\n\nEnter your choice: ");
 		scanf("%d",&choice);
 
@@ -116,6 +133,10 @@ void main()
 				getch();
 				break;
 			case 3: display();
+				getch();
+				break;
+
+			case 4:modify();
 				getch();
 				break;
 

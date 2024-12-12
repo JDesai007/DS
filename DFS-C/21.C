@@ -1,58 +1,72 @@
 #include <stdio.h>
-#include<conio.h>
 
-#define max 10
+void merge(int arr[], int left, int mid, int right) {
+    int n1 = mid - left + 1;
+    int n2 = right - mid;
 
-int a[11] = { 10, 14, 19, 26, 27, 31, 33, 35, 42, 44, 0 };
-int b[10];
+    int L[n1], R[n2];
 
-void merging(int low, int mid, int high) {
-   int l1, l2, i;
+    for (int i = 0; i < n1; i++)
+        L[i] = arr[left + i];
+    for (int j = 0; j < n2; j++)
+        R[j] = arr[mid + 1 + j];
 
-   for(l1 = low, l2 = mid + 1, i = low; l1 <= mid && l2 <= high; i++) {
-      if(a[l1] <= a[l2])
-         b[i] = a[l1++];
-      else
-         b[i] = a[l2++];
-   }
-   
-   while(l1 <= mid)    
-      b[i++] = a[l1++];
+    int i = 0, j = 0, k = left;
+    while (i < n1 && j < n2) {
+        if (L[i] <= R[j]) {
+            arr[k] = L[i];
+            i++;
+        } else {
+            arr[k] = R[j];
+            j++;
+        }
+        k++;
+    }
 
-   while(l2 <= high)   
-      b[i++] = a[l2++];
+    while (i < n1) {
+        arr[k] = L[i];
+        i++;
+        k++;
+    }
 
-   for(i = low; i <= high; i++)
-      a[i] = b[i];
+    while (j < n2) {
+        arr[k] = R[j];
+        j++;
+        k++;
+    }
 }
 
-void sort(int low, int high) {
-   int mid;
-   
-   if(low < high) {
-      mid = (low + high) / 2;
-      sort(low, mid);
-      sort(mid+1, high);
-      merging(low, mid, high);
-   } else { 
-      return;
-   }   
+void mergeSort(int arr[], int left, int right) {
+    if (left < right) {
+        int mid = left + (right - left) / 2;
+
+        mergeSort(arr, left, mid);
+        mergeSort(arr, mid + 1, right);
+
+        merge(arr, left, mid, right);
+    }
 }
 
-void main() {
-   int i;
-   clrscr();
-   printf("List before sorting\n");
+int main() {
+    int n;
 
-   for(i = 0; i <= max; i++)
-      printf("%d ", a[i]);
+    printf("Enter the number of elements: ");
+    scanf("%d", &n);
 
-   sort(0, max);
+    int arr[n];
 
-   printf("\nList after sorting\n");
+    printf("Enter the elements: \n");
+    for (int i = 0; i < n; i++) {
+        scanf("%d", &arr[i]);
+    }
 
-   for(i = 0; i <= max; i++)
-      printf("%d ", a[i]);
+    mergeSort(arr, 0, n - 1);
 
-   getch();
+    printf("Sorted array: \n");
+    for (int i = 0; i < n; i++) {
+        printf("%d ", arr[i]);
+    }
+
+    printf("\n");
+    return 0;
 }
